@@ -114,6 +114,7 @@
   --letter-soft: oklch(0.43 0.035 33);
   --scene-wash: linear-gradient(90deg, oklch(0.16 0.045 25 / 0.79) 0%, oklch(0.21 0.045 31 / 0.48) 48%, oklch(0.3 0.035 42 / 0.08) 82%);
   --scene-vignette: linear-gradient(180deg, oklch(0.12 0.025 25 / 0.28), transparent 42%, oklch(0.11 0.025 24 / 0.5));
+  --sorry-cover-shade: linear-gradient(180deg, transparent 28%, oklch(0.13 0.04 23 / 0.88) 100%);
   --letter-paper: linear-gradient(145deg, oklch(0.985 0.018 82), oklch(0.955 0.032 72));
   --shadow-button: 0 16px 36px oklch(0.08 0.03 20 / 0.35);
   --shadow-letter: 0 35px 100px oklch(0.08 0.025 25 / 0.46), 0 0 45px oklch(0.88 0.07 60 / 0.16);
@@ -170,6 +171,7 @@
 .font-script { font-family: var(--font-script); }
 .bg-scene-wash { background: var(--scene-wash); }
 .bg-scene-vignette { background: var(--scene-vignette); }
+.sorry-cover-shade { background: var(--sorry-cover-shade); }
 .letter-paper { background: var(--letter-paper); }
 
 @keyframes reveal { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
