@@ -3,6 +3,7 @@ import { ArrowRight, Heart, MailOpen, RotateCcw } from "lucide-react";
 import { useState } from "react";
 
 import flowers from "@/assets/apology-flowers.jpg";
+import sorryLetterCover from "@/assets/sorry-letter-cover.jpg";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
@@ -51,39 +52,39 @@ function Index() {
         <div className="flex flex-1 items-center justify-center py-8 sm:py-12">
           {page === 1 && (
             <div key="page-1" className="w-full max-w-2xl text-center animate-page-turn">
-              <p className="mb-5 text-xs font-medium uppercase tracking-[0.32em] text-accent">
-                Sealed with all my love
+              <p className="mb-4 text-xs font-medium uppercase tracking-[0.32em] text-accent">
+                For the one I hurt
               </p>
-              <button
-                type="button"
-                className="envelope group mx-auto block w-full max-w-md cursor-pointer bg-transparent p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
-                onClick={() => setPage(2)}
-                aria-label="Open the letter"
-              >
-                <span className="envelope-body">
-                  <span className="envelope-letter">
-                    <span className="font-script text-4xl text-letter-ink sm:text-5xl">My dearest love</span>
-                    <span className="mt-1 text-[0.55rem] uppercase tracking-[0.3em] text-letter-soft">Forever yours</span>
-                  </span>
-                  <span className="envelope-flap" />
-                  <span className="envelope-front" />
-                  <span className="envelope-seal">
-                    <Heart className="size-5 fill-current" aria-hidden="true" />
-                  </span>
-                </span>
-              </button>
-               <h1 className="mt-9 font-script text-6xl leading-tight text-foreground sm:text-8xl">A letter for you</h1>
-              <p className="mx-auto mt-4 max-w-md text-base leading-7 text-soft">
-                 Every word inside has been waiting for your heart.
+              <div className="sorry-cover group relative mx-auto aspect-[3/2] w-full max-w-lg overflow-hidden rounded-sm border border-veil shadow-[var(--shadow-letter)]">
+                <img
+                  src={sorryLetterCover}
+                  alt="A handwritten apology letter surrounded by blush peonies and deep red roses"
+                  width={1200}
+                  height={800}
+                  className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-[1.03]"
+                />
+                <div className="sorry-cover-shade absolute inset-0" />
+                <div className="absolute inset-x-5 bottom-5 border-t border-veil pt-4 text-left sm:inset-x-8 sm:bottom-7">
+                  <p className="font-script text-4xl leading-none text-foreground sm:text-5xl">My dearest love,</p>
+                  <p className="mt-2 max-w-sm text-sm leading-6 text-soft sm:text-base">
+                    My heart has been carrying words I couldn’t say.
+                  </p>
+                </div>
+              </div>
+              <h1 className="mt-7 font-script text-5xl leading-tight text-foreground sm:text-7xl">
+                My feelings are hidden inside
+              </h1>
+              <p className="mx-auto mt-3 max-w-md text-base leading-7 text-soft">
+                Please open this gently—every word comes with love, regret, and the hope that I can make things right.
               </p>
               <Button
                 variant="romantic"
                 size="lg"
-                className="mt-8 h-12 rounded-full px-7"
+                className="mt-6 h-12 rounded-full px-7"
                 onClick={() => setPage(2)}
               >
                 <MailOpen />
-                 Open gently
+                 Open what’s in my heart
               </Button>
             </div>
 
