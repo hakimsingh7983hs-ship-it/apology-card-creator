@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Heart, MailOpen, X } from "lucide-react";
+import { ArrowRight, Heart, MailOpen, RotateCcw } from "lucide-react";
 import { useState } from "react";
 
 import flowers from "@/assets/apology-flowers.jpg";
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [page, setPage] = useState<1 | 2 | 3>(1);
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-background text-foreground">
@@ -40,37 +40,98 @@ function Index() {
         ))}
       </div>
 
-      <section className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-6 sm:px-10 lg:px-16">
+      <section className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-5 py-5 sm:px-10 sm:py-6 lg:px-16">
         <header className="flex items-center justify-between border-b border-veil pb-5 animate-reveal">
           <p className="text-xs font-medium uppercase tracking-[0.28em] text-soft">A letter from my heart</p>
-          <Heart className="size-4 fill-current text-accent" aria-hidden="true" />
+          <p className="text-xs font-medium uppercase tracking-[0.22em] text-soft" aria-live="polite">
+            {page} of 3
+          </p>
         </header>
 
-        <div className="flex flex-1 items-center py-14 sm:py-20">
-          <div className="max-w-2xl">
-            <p className="mb-5 font-medium uppercase tracking-[0.3em] text-accent animate-reveal delay-1">
-              To the one I love
-            </p>
-            <h1 className="font-display text-6xl leading-[0.98] text-balance sm:text-8xl lg:text-9xl animate-reveal delay-2">
-              I’m sorry,
-              <span className="block italic text-accent-strong">my love.</span>
-            </h1>
-            <p className="mt-7 max-w-xl text-base leading-8 text-soft sm:text-lg animate-reveal delay-3">
-              I know my words and actions hurt you. You deserved patience, gentleness, and a love that made you feel safe. I’m not asking you to forget—only for the chance to listen, to learn, and to make things right.
-            </p>
-            <div className="mt-9 flex flex-wrap items-center gap-5 animate-reveal delay-4">
+        <div className="flex flex-1 items-center justify-center py-8 sm:py-12">
+          {page === 1 && (
+            <div key="page-1" className="w-full max-w-2xl text-center animate-page-turn">
+              <p className="mb-6 text-xs font-medium uppercase tracking-[0.32em] text-accent">
+                For the one I love
+              </p>
+              <button
+                type="button"
+                className="envelope group mx-auto block w-full max-w-md cursor-pointer bg-transparent p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+                onClick={() => setPage(2)}
+                aria-label="Open the letter"
+              >
+                <span className="envelope-body">
+                  <span className="envelope-letter">
+                    <Heart className="size-8 fill-current text-accent" aria-hidden="true" />
+                  </span>
+                  <span className="envelope-flap" />
+                  <span className="envelope-front" />
+                  <span className="envelope-seal">
+                    <Heart className="size-5 fill-current" aria-hidden="true" />
+                  </span>
+                </span>
+              </button>
+              <h1 className="mt-10 font-display text-5xl leading-tight sm:text-7xl">A letter for you</h1>
+              <p className="mx-auto mt-4 max-w-md text-base leading-7 text-soft">
+                There is something my heart needs to say.
+              </p>
               <Button
                 variant="romantic"
                 size="lg"
-                className="h-12 rounded-full px-7"
-                onClick={() => setIsOpen(true)}
+                className="mt-8 h-12 rounded-full px-7"
+                onClick={() => setPage(2)}
               >
                 <MailOpen />
-                Open my heart
+                Open the letter
               </Button>
-              <p className="font-display text-xl italic text-soft">Please read one last thing…</p>
             </div>
-          </div>
+
+          )}
+
+          {page === 2 && (
+            <article key="page-2" className="letter-paper relative w-full max-w-2xl rounded-sm border border-letter-border px-7 py-9 text-center shadow-[var(--shadow-letter)] sm:px-14 sm:py-12 animate-page-turn">
+              <p className="text-xs font-medium uppercase tracking-[0.3em] text-accent">My apology</p>
+              <h1 className="mt-5 font-display text-5xl leading-tight text-letter-ink sm:text-7xl">
+                I’m sorry,
+                <span className="block italic text-accent-strong">my love.</span>
+              </h1>
+              <div className="mx-auto my-6 h-px w-16 bg-accent" />
+              <p className="mx-auto max-w-xl text-base leading-8 text-letter-soft sm:text-lg">
+                I know my words and actions hurt you. You deserved patience, gentleness, and a love that made you feel safe. I’m not asking you to forget—only for the chance to listen, to learn, and to make things right.
+              </p>
+              <Button
+                variant="romantic"
+                size="lg"
+                className="mt-8 h-12 rounded-full px-7"
+                onClick={() => setPage(3)}
+              >
+                One last thing
+                <ArrowRight />
+              </Button>
+            </article>
+          )}
+
+          {page === 3 && (
+            <article key="page-3" className="letter-paper relative w-full max-w-2xl rounded-sm border border-letter-border px-7 py-9 text-center shadow-[var(--shadow-letter)] sm:px-14 sm:py-12 animate-page-turn">
+              <p className="text-xs font-medium uppercase tracking-[0.3em] text-accent">My promise to you</p>
+              <h1 className="mt-5 font-display text-5xl text-letter-ink sm:text-7xl">I choose us.</h1>
+              <div className="mx-auto my-6 h-px w-16 bg-accent" />
+              <p className="mx-auto max-w-xl text-base leading-8 text-letter-soft sm:text-lg">
+                I can’t undo the moment I hurt you, but I can own it. I will listen without defending myself, love you without taking you for granted, and show you through my actions that your heart is precious to me.
+              </p>
+              <p className="mt-7 font-display text-3xl italic text-accent-strong sm:text-4xl">Can you forgive me?</p>
+              <Heart className="mx-auto mt-6 size-6 fill-current text-accent animate-heartbeat" aria-hidden="true" />
+              <Button
+                variant="ghost"
+                size="sm"
+                className="mt-7 rounded-full text-letter-soft hover:bg-accent/15"
+                onClick={() => setPage(1)}
+              >
+                <RotateCcw />
+                Read again
+              </Button>
+            </article>
+          )}
         </div>
 
         <footer className="flex items-end justify-between border-t border-veil pt-5 text-xs uppercase tracking-[0.22em] text-soft animate-reveal delay-4">
@@ -78,30 +139,6 @@ function Index() {
           <span className="hidden sm:inline">Always yours</span>
         </footer>
       </section>
-
-      {isOpen && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-modal-backdrop p-5 animate-modal-in" role="dialog" aria-modal="true" aria-labelledby="letter-title">
-          <article className="letter-paper relative w-full max-w-xl overflow-hidden rounded-sm border border-letter-border px-7 py-10 text-center shadow-[var(--shadow-letter)] sm:px-14 sm:py-14">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute right-3 top-3 rounded-full text-muted-foreground"
-              onClick={() => setIsOpen(false)}
-              aria-label="Close letter"
-            >
-              <X />
-            </Button>
-            <p className="text-xs font-medium uppercase tracking-[0.3em] text-accent">My promise to you</p>
-            <h2 id="letter-title" className="mt-5 font-display text-4xl text-letter-ink sm:text-5xl">I choose us.</h2>
-            <div className="mx-auto my-7 h-px w-16 bg-accent" />
-            <p className="text-base leading-8 text-letter-soft sm:text-lg">
-              I can’t undo the moment I hurt you, but I can own it. I will listen without defending myself, love you without taking you for granted, and show you through my actions that your heart is precious to me.
-            </p>
-            <p className="mt-7 font-display text-2xl italic text-accent-strong">Can you forgive me?</p>
-            <Heart className="mx-auto mt-6 size-5 fill-current text-accent animate-heartbeat" aria-hidden="true" />
-          </article>
-        </div>
-      )}
     </main>
   );
 }
